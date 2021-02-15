@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.21.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: grpc-client
+  name: grpc-client
+  namespace: c7-realm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: grpc-client
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.21.0 ()
+      creationTimestamp: null
+      labels:
+        io.kompose.service: grpc-client
+    spec:
+      containers:
+      - image: samscontainerregistry.azurecr.io/nerds/c7-services/name-resolver-client:latest
+        imagePullPolicy: ""
+        name: grpc-client
+        ports:
+        - containerPort: 8080
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

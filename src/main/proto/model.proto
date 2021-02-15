@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+// options for Java generated sources
+option java_multiple_files = true;
+option java_package = "com.mayur.internal.core.model";
+
+package com.mayur.internal.core.model;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+message Employee {
+    int32 id = 1;
+    string name = 2;
+    double phoneNumber = 3;
+    google.protobuf.Timestamp createdOn = 4;
+    google.protobuf.Timestamp modifiedOn = 5;
+    EmployeeMetadata metadata = 6;
+}
+
+message ServiceResponse {
+    Employee payload = 1;
+    ResponseStatus status = 2;
+    enum ResponseStatus {
+        SUCCESS=0;
+        FAIL=1;
+    }
+    ServiceError error = 3;
+}
+
+message EmployeeMetadata {
+    string role = 1;
+    double salary = 2;
+    int32 reportees = 3;
+    google.protobuf.Timestamp eoj = 4;
+}
+
+message ServiceError {
+    string name = 1;
+    string code = 2;
+    string description = 3;
+}
+
+message HealthRequest {
+    bool deep = 1;
+    string service = 2;
+}
+
+message HealthResponse {
+    ServingStatus status = 1;
+
+    enum ServingStatus {
+        UNKNOWN = 0;
+        SERVING = 1;
+        NOT_SERVING = 2;
+        SERVICE_UNKNOWN = 3;
+    }
+}
+

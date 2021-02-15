@@ -1,0 +1,6 @@
+version: '3'
+services:
+  grpc-client:
+    image: "samscontainerregistry.azurecr.io/nerds/c7-services/name-resolver-client:latest"
+    ports:
+      - "8080:8080"
